@@ -18,7 +18,7 @@ def create_new_site(site_name):
 
 def create_event_producer():
 	event_producer = frappe.new_doc('Event Producer')
-	event_producer.producer_url = 'http://test-site-2:8004'
+	event_producer.producer_url = 'http://test_site_2:8000'
 	event_producer.append('subscribed_doctypes', {
 		'ref_doctype': 'ToDo'
 	})
@@ -34,7 +34,7 @@ def create_event_producer():
 class TestEventProducer(unittest.TestCase):
 	def setUp(self):
 		# create_new_site("test")
-		if not frappe.db.exists('Event Producer', 'http://test-site-2:8004'):
+		if not frappe.db.exists('Event Producer', 'http://test_site_2:8000'):
 			create_event_producer()
 		frappe.db.sql('delete from tabToDo')
 		frappe.db.sql('delete from tabNote')
@@ -128,7 +128,7 @@ class TestEventProducer(unittest.TestCase):
 		producer_link_doc = frappe.get_doc(dict(doctype='Note', title='Test Dynamic Link 1'))
 
 		#unsubscribe for Note to check dynamic link dependency fulfilled
-		event_producer = frappe.get_doc('Event Producer', 'http://test-site-2:8004')
+		event_producer = frappe.get_doc('Event Producer', 'http://test_site_2:8000')
 		event_producer.subscribed_doctypes = []
 		event_producer.append('subscribed_doctypes', {
 			'ref_doctype': 'ToDo'
@@ -168,7 +168,7 @@ def make_email_account_in_producer(producer, name, email_id):
 	return producer.insert(doc)
 
 def get_remote_site():
-	producer_doc = frappe.get_doc('Event Producer', 'http://test-site-2:8004')
+	producer_doc = frappe.get_doc('Event Producer', 'http://test_site_2:8000')
 	producer_site = FrappeClient(
 		url=producer_doc.producer_url,
 		api_key=producer_doc.api_key,
