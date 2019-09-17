@@ -53,7 +53,7 @@ class FrappeClient(object):
 
 	def setup_key_authentication_headers(self):
 		if self.api_key and self.api_secret:
-			token = b64encode('{}:{}'. format(self.api_key.encode('utf-8'), self.api_secret.encode('utf-8')))
+			token = b64encode(('{}:{}'.format(self.api_key, self.api_secret)).encode('utf-8'))
 			auth_header = {'Authorization': 'Basic {}'.format(token)}
 			self.headers.update(auth_header)
 
