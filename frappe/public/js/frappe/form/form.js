@@ -556,7 +556,10 @@ frappe.ui.form.Form = class FrappeForm {
 			resolve();
 		};
 
-		var fail = () => {
+		var fail = (e) => {
+			if (e) {
+				console.error(e)
+			}
 			btn && $(btn).prop("disabled", false);
 			if(on_error) {
 				on_error();
@@ -839,7 +842,7 @@ frappe.ui.form.Form = class FrappeForm {
 	}
 
 	rename_doc() {
-		frappe.model.rename_doc(this.doctype, this.docname);
+		frappe.model.rename_doc(this.doctype, this.docname, () => this.refresh_header());
 	}
 
 	share_doc() {
