@@ -43,7 +43,7 @@ class TestEventProducer(unittest.TestCase):
 		producer = get_remote_site()
 		producer_doc = self.insert_into_producer(producer, 'test creation 1 sync')
 		pull_producer_data()
-		time.sleep(1)
+		time.sleep(5)
 		self.assertTrue(frappe.db.get_value('ToDo', producer_doc.name))
 		
 	def test_update(self):
@@ -52,7 +52,7 @@ class TestEventProducer(unittest.TestCase):
 		producer_doc['description'] = 'test update 2'
 		producer_doc = producer.update(producer_doc)
 		pull_producer_data()
-		time.sleep(1)
+		time.sleep(5)
 		local_doc = frappe.get_doc(producer_doc.doctype, producer_doc.name)
 		self.assertEqual(local_doc.description, producer_doc.description)
 
