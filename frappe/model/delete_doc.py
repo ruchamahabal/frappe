@@ -19,8 +19,11 @@ from frappe.utils.global_search import delete_for_document
 from six import string_types, integer_types
 from frappe.model.document import make_update_log
 from frappe.exceptions import FileNotFoundError
+from frappe.desk.doctype.tag.tag import delete_tags_for_document
+from frappe.exceptions import FileNotFoundError
 
-doctypes_to_skip = ("Communication", "ToDo", "DocShare", "Email Unsubscribe", "Activity Log", "File", "Version", "Document Follow", "Comment" , "View Log")
+
+doctypes_to_skip = ("Communication", "ToDo", "DocShare", "Email Unsubscribe", "Activity Log", "File", "Version", "Document Follow", "Comment" , "View Log", "Tag Link")
 
 def delete_doc(doctype=None, name=None, force=0, ignore_doctypes=None, for_reload=False,
 	ignore_permissions=False, flags=None, ignore_on_trash=False, ignore_missing=True):
@@ -76,7 +79,7 @@ def delete_doc(doctype=None, name=None, force=0, ignore_doctypes=None, for_reloa
 
 			delete_from_table(doctype, name, ignore_doctypes, None)
 
-			if not (frappe.flags.in_migrate or frappe.flags.in_install or frappe.flags.in_test):
+			if not (for_reload or frappe.flags.in_migrate or frappe.flags.in_install or frappe.flags.in_test):
 				try:
 					delete_controllers(name, doc.module)
 				except (FileNotFoundError, OSError):
@@ -117,6 +120,8 @@ def delete_doc(doctype=None, name=None, force=0, ignore_doctypes=None, for_reloa
 
 		# delete global search entry
 		delete_for_document(doc)
+		# delete tag link entry
+		delete_tags_for_document(doc)
 
 		# update log if doctype has event consumers
 		if not frappe.flags.in_install and not frappe.flags.in_migrate:
