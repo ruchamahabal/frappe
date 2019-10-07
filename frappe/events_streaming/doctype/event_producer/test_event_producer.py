@@ -15,13 +15,16 @@ def create_event_producer():
 	event_producer = frappe.new_doc('Event Producer')
 	event_producer.producer_url = 'http://test_site_2:8000'
 	event_producer.append('subscribed_doctypes', {
-		'ref_doctype': 'ToDo'
+		'ref_doctype': 'ToDo',
+		'use_same_name': 1
 	})
 	event_producer.append('subscribed_doctypes', {
 		'ref_doctype': 'Note',
+		'use_same_name': 1
 	})
 	event_producer.append('subscribed_doctypes', {
-		'ref_doctype': 'User'
+		'ref_doctype': 'User',
+		'use_same_name': 1
 	})
 	event_producer.user = 'Administrator'
 	event_producer.insert()
@@ -125,7 +128,8 @@ class TestEventProducer(unittest.TestCase):
 		event_producer = frappe.get_doc('Event Producer', 'http://test_site_2:8000')
 		event_producer.subscribed_doctypes = []
 		event_producer.append('subscribed_doctypes', {
-			'ref_doctype': 'ToDo'
+			'ref_doctype': 'ToDo',
+			'use_same_name': 1
 		})
 		event_producer.save()
 
