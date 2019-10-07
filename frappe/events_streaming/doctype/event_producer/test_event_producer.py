@@ -14,7 +14,7 @@ from frappe.events_streaming.doctype.event_producer.event_producer import pull_p
 def create_event_producer():
 	event_producer = frappe.new_doc('Event Producer')
 	event_producer.producer_url = 'http://test_site_2:8000'
-	event_producer.append('subscribed_doctypes', {
+	event_producer.append('event_configuration', {
 		'ref_doctype': 'ToDo',
 		'use_same_name': 1
 	})
