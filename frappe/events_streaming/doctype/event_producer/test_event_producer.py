@@ -18,11 +18,11 @@ def create_event_producer():
 		'ref_doctype': 'ToDo',
 		'use_same_name': 1
 	})
-	event_producer.append('subscribed_doctypes', {
+	event_producer.append('event_configuration', {
 		'ref_doctype': 'Note',
 		'use_same_name': 1
 	})
-	event_producer.append('subscribed_doctypes', {
+	event_producer.append('event_configuration', {
 		'ref_doctype': 'User',
 		'use_same_name': 1
 	})
@@ -126,8 +126,8 @@ class TestEventProducer(unittest.TestCase):
 
 		#unsubscribe for Note to check dynamic link dependency fulfilled
 		event_producer = frappe.get_doc('Event Producer', 'http://test_site_2:8000')
-		event_producer.subscribed_doctypes = []
-		event_producer.append('subscribed_doctypes', {
+		event_producer.event_configuration = []
+		event_producer.append('event_configuration', {
 			'ref_doctype': 'ToDo',
 			'use_same_name': 1
 		})
