@@ -18,14 +18,6 @@ def create_event_producer():
 		'ref_doctype': 'ToDo',
 		'use_same_name': 1
 	})
-	event_producer.append('event_configuration', {
-		'ref_doctype': 'Note',
-		'use_same_name': 1
-	})
-	event_producer.append('event_configuration', {
-		'ref_doctype': 'User',
-		'use_same_name': 1
-	})
 	event_producer.user = 'Administrator'
 	event_producer.insert()
 
@@ -65,6 +57,17 @@ class TestEventProducer(unittest.TestCase):
 		self.assertFalse(frappe.db.exists('ToDo', producer_doc.name))
 
 	def test_multiple_doctypes_sync(self):
+		event_producer = frappe.get_doc('Event Producer', 'http://test_site_2:8000')
+		event_producer.event_configuration = []
+		event_producer.append('event_configuration', {
+			'ref_doctype': 'ToDo',
+			'use_same_name': 1
+		})
+		event_producer.append('event_configuration', {
+			'ref_doctype': 'Note',
+			'use_same_name': 1
+		})
+		event_producer.save()
 		producer = get_remote_site()
 
 		#insert todo and note in producer
@@ -87,6 +90,7 @@ class TestEventProducer(unittest.TestCase):
 		producer.delete('Note', producer_note2.name)
 
 		pull_producer_data()
+
 		time.sleep(1)
 
 		#check inserted
@@ -102,6 +106,17 @@ class TestEventProducer(unittest.TestCase):
 		self.assertFalse(frappe.db.exists('Note', producer_note2.name))
 
 	def test_child_table_sync_with_dependencies(self):
+		event_producer = frappe.get_doc('Event Producer', 'http://test_site_2:8000')
+		event_producer.event_configuration = []
+		event_producer.append('event_configuration', {
+			'ref_doctype': 'ToDo',
+			'use_same_name': 1
+		})
+		event_producer.append('event_configuration', {
+			'ref_doctype': 'User',
+			'use_same_name': 1
+		})
+		event_producer.save()
 		producer = get_remote_site()
 		producer_user = frappe.get_doc(dict(doctype='User', email='test_user@sync.com', first_name='Test Sync User'))
 		delete_on_remote_if_exists(producer, 'User', {'email': 'test_user@sync.com'})
@@ -123,15 +138,6 @@ class TestEventProducer(unittest.TestCase):
 	def test_dynamic_link_dependencies_synced(self):
 		producer = get_remote_site()
 		producer_link_doc = frappe.get_doc(dict(doctype='Note', title='Test Dynamic Link 1'))
-
-		#unsubscribe for Note to check dynamic link dependency fulfilled
-		event_producer = frappe.get_doc('Event Producer', 'http://test_site_2:8000')
-		event_producer.event_configuration = []
-		event_producer.append('event_configuration', {
-			'ref_doctype': 'ToDo',
-			'use_same_name': 1
-		})
-		event_producer.save()
 
 		delete_on_remote_if_exists(producer, 'Note', {'title': producer_link_doc.title})
 		frappe.db.delete('Note', {'title': producer_link_doc.title})
