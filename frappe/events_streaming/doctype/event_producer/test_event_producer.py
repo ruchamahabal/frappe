@@ -9,7 +9,7 @@ import time
 from frappe import _
 from frappe.commands.site import new_site
 from frappe.frappeclient import FrappeClient
-from frappe.events_streaming.doctype.event_producer.event_producer import pull_producer_data, get_current_node
+from frappe.events_streaming.doctype.event_producer.event_producer import pull_producer_data, get_current_node, pull_from_node
 
 def create_event_producer():
 	event_producer = frappe.new_doc('Event Producer')
@@ -31,8 +31,8 @@ class TestEventProducer(unittest.TestCase):
 	def test_insert(self):
 		producer = get_remote_site()
 		producer_doc = self.insert_into_producer(producer, 'test creation 1 sync')
-		pull_producer_data()
-		time.sleep(1)
+		pull_from_node('http://test_site_2:8000')
+		time.sleep(3)
 		self.assertTrue(frappe.db.get_value('ToDo', producer_doc.name))
 		
 	def test_update(self):
@@ -40,20 +40,20 @@ class TestEventProducer(unittest.TestCase):
 		producer_doc = self.insert_into_producer(producer, 'test update 1')
 		producer_doc['description'] = 'test update 2'
 		producer_doc = producer.update(producer_doc)
-		pull_producer_data()
-		time.sleep(1)
+		pull_from_node('http://test_site_2:8000')
+		time.sleep(3)
 		local_doc = frappe.get_doc(producer_doc.doctype, producer_doc.name)
 		self.assertEqual(local_doc.description, producer_doc.description)
 
 	def test_delete(self):
 		producer = get_remote_site()
 		producer_doc = self.insert_into_producer(producer, 'test delete sync')
-		pull_producer_data()
-		time.sleep(1)
+		pull_from_node('http://test_site_2:8000')
+		time.sleep(3)
 		self.assertTrue(frappe.db.exists('ToDo', producer_doc.name))
 		producer.delete('ToDo', producer_doc.name)
-		pull_producer_data()
-		time.sleep(1)
+		pull_from_node('http://test_site_2:8000')
+		time.sleep(3)
 		self.assertFalse(frappe.db.exists('ToDo', producer_doc.name))
 
 	def test_multiple_doctypes_sync(self):
