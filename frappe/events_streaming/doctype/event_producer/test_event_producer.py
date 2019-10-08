@@ -90,7 +90,6 @@ class TestEventProducer(unittest.TestCase):
 		producer.delete('Note', producer_note2.name)
 
 		pull_producer_data()
-
 		time.sleep(1)
 
 		#check inserted
