@@ -89,8 +89,8 @@ class TestEventProducer(unittest.TestCase):
 
 		producer.delete('Note', producer_note2.name)
 
-		pull_producer_data()
-		time.sleep(1)
+		pull_from_node('http://test_site_2:8000')
+		time.sleep(3)
 
 		#check inserted
 		self.assertTrue(frappe.db.exists('ToDo', producer_todo.name))
@@ -127,8 +127,8 @@ class TestEventProducer(unittest.TestCase):
 			'email_account': email_account.name
 		})
 		producer_user = producer.insert(producer_user)
-		pull_producer_data()
-		time.sleep(1)
+		pull_from_node('http://test_site_2:8000')
+		time.sleep(3)
 		self.assertTrue(frappe.db.exists('Email Account', email_account.name))
 		if self.assertTrue(frappe.db.exists('User', producer_user.name)):
 			local_user = frappe.get_doc('User', producer_user.name)
@@ -144,8 +144,8 @@ class TestEventProducer(unittest.TestCase):
 		producer_doc = frappe.get_doc(dict(doctype='ToDo', description='Test Dynamic Link 2', assigned_by='Administrator', reference_type='Note', reference_name=producer_link_doc.name))
 		producer_doc = producer.insert(producer_doc)
 
-		pull_producer_data()
-		time.sleep(1)
+		pull_from_node('http://test_site_2:8000')
+		time.sleep(3)
 
 		#check dynamic link dependency created
 		self.assertTrue(frappe.db.exists('Note', producer_link_doc.name))
