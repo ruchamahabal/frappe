@@ -117,7 +117,9 @@ class AutoRepeat(Document):
 			start_date = get_next_schedule_date(start_date, self.frequency, self.repeat_on_day, self.repeat_on_last_day)
 
 		if self.end_date:
-			start_date = get_next_schedule_date(start_date, self.frequency, self.repeat_on_day, self.repeat_on_last_day)
+			start_date = get_next_schedule_date(
+				start_date, self.frequency, self.repeat_on_day, self.repeat_on_last_day, for_full_schedule=True)
+
 			while (getdate(start_date) < getdate(end_date)):
 				row = {
 					"reference_document" : self.reference_document,
@@ -125,8 +127,8 @@ class AutoRepeat(Document):
 					"next_scheduled_date" : start_date
 				}
 				schedule_details.append(row)
-				start_date = get_next_schedule_date(start_date, self.frequency, self.repeat_on_day, self.repeat_on_last_day, end_date)
-
+				start_date = get_next_schedule_date(
+					start_date, self.frequency, self.repeat_on_day, self.repeat_on_last_day, end_date, for_full_schedule=True)
 
 		return schedule_details
 
@@ -267,12 +269,15 @@ class AutoRepeat(Document):
 		)
 
 
-def get_next_schedule_date(start_date, frequency, repeat_on_day, repeat_on_last_day = False, end_date = None):
+def get_next_schedule_date(start_date, frequency, repeat_on_day, repeat_on_last_day = False, end_date = None, for_full_schedule=False):
 	month_count = month_map.get(frequency)
+	day_count = 0
 	if month_count and repeat_on_last_day:
-		next_date = get_next_date(start_date, month_count, 31)
+		day_count = 31
+		next_date = get_next_date(start_date, month_count, day_count)
 	elif month_count and repeat_on_day:
-		next_date = get_next_date(start_date, month_count, repeat_on_day)
+		day_count = repeat_on_day
+		next_date = get_next_date(start_date, month_count, day_count)
 	elif month_count:
 		next_date = get_next_date(start_date, month_count)
 	else:
@@ -280,9 +285,9 @@ def get_next_schedule_date(start_date, frequency, repeat_on_day, repeat_on_last_
 		next_date = add_days(start_date, days)
 
 	# next schedule date should be after or on current date
-	while getdate(next_date) < getdate(today()):
-		next_date = get_next_schedule_date(
-			next_date, frequency, repeat_on_day, repeat_on_last_day, end_date)
+	if not for_full_schedule:
+		while getdate(next_date) < getdate(today()):
+			next_date = get_next_date(next_date, month_count, day_count)
 
 	return next_date
 
