@@ -94,7 +94,8 @@ def register_consumer(data):
 			'condition': entry.get('condition')
 		})
 
-	consumer.insert()
+	# ignore permissions since user cannot create consumer
+	consumer.insert(ignore_permissions=True)
 
 	# consumer's 'last_update' field should point to the latest update
 	# in producer's update log when subscribing
