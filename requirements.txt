@@ -3,7 +3,7 @@ chardet
 dropbox==9.1.0
 gunicorn
 jinja2
-markdown2==2.3.5
+markdown2==2.4.2
 PyMySQL
 maxminddb-geolite2
 python-dateutil
@@ -15,14 +15,14 @@ rauth>=0.6.2
 requests
 redis==2.10.6
 selenium
-babel==2.6.0
+babel==2.9.1
 ipython
 html2text==2016.9.19
 email_reply_parser
 click==7.0
 num2words==0.5.5
 watchdog==0.8.0
-bleach==2.1.4
+bleach==3.3.0
 bleach-whitelist
 Pillow
 beautifulsoup4
@@ -60,8 +60,8 @@ urllib3
 GitPython==2.1.11
 psycopg2==2.7.5
 psycopg2-binary==2.7.5
-sqlparse==0.2.4
-Pygments==2.2.0
+sqlparse==0.4.2
+Pygments==2.7.4
 frontmatter
 PyYAML==5.4
 xlrd
