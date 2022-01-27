@@ -438,7 +438,15 @@ class Database(object):
 				else:
 					fields = fieldname
 
-			if (filters is not None) and (filters!=doctype or doctype=="DocType"):
+			# determine if it's really a single doctype if the docname is same as doctype
+			issingle = 0
+			if filters == doctype and doctype != "DocType":
+				# cannot use meta or get_value to get this value as it leads to recursion errors
+				issingle = self.sql("select issingle from `tabDocType` where name = '{doctype}'".format(doctype=doctype), pluck="issingle")
+				if issingle:
+					issingle = issingle[0]
+
+			if (filters is not None) and (not issingle or doctype=="DocType"):
 				try:
 					if order_by:
 						order_by = "modified" if order_by == "KEEP_DEFAULT_ORDERING" else order_by
