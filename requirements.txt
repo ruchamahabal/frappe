@@ -66,3 +66,4 @@ frontmatter
 PyYAML==5.4
 xlrd
 RestrictedPython==5.0
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
