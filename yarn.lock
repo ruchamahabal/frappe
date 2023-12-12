@@ -1129,10 +1129,10 @@ driver.js@^0.9.8:
   resolved "https://registry.yarnpkg.com/driver.js/-/driver.js-0.9.8.tgz#4b327f4537b1c9b9fb19419de86174be821ae32a"
   integrity sha512-bczjyKdX6XmFyCDkwtRmlaORDwfBk1xXmRO0CAe5VwNQTM98aWaG2LAIiIdTe53iV/B7W5lXlIy2xYtf0JRb7Q==
 
-editorjs-undo@0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/editorjs-undo/-/editorjs-undo-0.1.6.tgz#823349a1e9a78d8bc68ba8570a2b854063bc804a"
-  integrity sha512-zVHPnBf2mcI8hWT9Eu8H3bGDEcMj4gppXbQjJW11Aa8Kdy2SVBGhM6fS59OUlBsm8iHWLxuoG2NUIfy9Rd30sw==
+editorjs-undo@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/editorjs-undo/-/editorjs-undo-0.3.0.tgz#b857943709e8bfe1c8a3d16084ddba6563eeff15"
+  integrity sha512-uIt69atHS3zDXvSj4GcCvf8fEms02klatBMSqQrYybMIUEjBKhC0B7L6MqG/ETs90x1tQKNf5mJfe1Ozfovt2Q==
 
 electron-to-chromium@^1.4.535:
   version "1.4.594"
