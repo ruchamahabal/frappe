@@ -205,10 +205,10 @@
   resolved "https://registry.yarnpkg.com/@vue-flow/background/-/background-1.2.0.tgz#6b7c283fd679838df90dda8dd98f322c368b7e59"
   integrity sha512-ZqmYhOM/0aRmA5dA3KSHJNYpHnhmG2e6tzjmttoibo4JBI3KNbdyOX+OTlqt7Ic0LYUC6NWzRLAwv4gjJuc6Mg==
 
-"@vue-flow/core@^1.16.2":
-  version "1.26.0"
-  resolved "https://registry.yarnpkg.com/@vue-flow/core/-/core-1.26.0.tgz#821f0c05b9a1541823101619ab4175ce323797d1"
-  integrity sha512-/sHe8Cx+KapjP1PdYsJwMgtCXN1kD2/+8We5/VAoQlfiKj3h+WgRJ5BGnluMwSpoaFOTRPhBuynF4r3N4uXJDA==
+"@vue-flow/core@^1.27.1":
+  version "1.28.0"
+  resolved "https://registry.yarnpkg.com/@vue-flow/core/-/core-1.28.0.tgz#c13de640fc06443949cf91231934339f95397196"
+  integrity sha512-hJGlTrlTtjgz9qa9AYcqQctTY9+FABYyh88rAGZ8Y+MkB36G1CWu6+CigJ9DGckgZHtdL9dUGUceinraNl+g3Q==
   dependencies:
     "@vueuse/core" "^10.5.0"
     d3-drag "^3.0.0"
