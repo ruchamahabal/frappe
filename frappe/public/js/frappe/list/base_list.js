@@ -177,14 +177,10 @@ frappe.views.BaseList = class BaseList {
 		this.set_title();
 		this.set_menu_items();
 		this.set_breadcrumbs();
-
-		if (this.meta.description) {
-			this.page.add_help_button(this.meta.description);
-		}
 	}
 
 	set_title() {
-		this.page.set_title(this.page_title);
+		this.page.set_title(this.page_title, null, null, null, this.meta.description);
 	}
 
 	setup_view_menu() {

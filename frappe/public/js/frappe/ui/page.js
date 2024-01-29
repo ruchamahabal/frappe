@@ -757,7 +757,7 @@ frappe.ui.Page = class Page {
 		return this.$title_area;
 	}
 
-	set_title(title, icon = null, strip = true, tab_title = "") {
+	set_title(title, icon = null, strip = true, tab_title = "", tooltip_label = "") {
 		if (!title) title = "";
 		if (strip) {
 			title = strip_html(title);
@@ -769,7 +769,9 @@ frappe.ui.Page = class Page {
 		}
 		let title_wrapper = this.$title_area.find(".title-text");
 		title_wrapper.html(title);
-		title_wrapper.attr("title", this.title);
+		title_wrapper
+			.attr("title", tooltip_label || this.title)
+			.tooltip({ delay: { show: 600, hide: 100 }, trigger: "hover"});
 	}
 
 	set_title_sub(txt) {
@@ -785,18 +787,7 @@ frappe.ui.Page = class Page {
 	}
 
 	add_help_button(txt) {
-		const description = $(`
-			<button class="btn-reset description-btn">
-				${frappe.utils.icon("help", "md") }
-			</button>
-		`).insertAfter(this.$title_area.find(".title-text"));
-
-		description.popover({
-			trigger: "hover",
-			placement: "top",
-			content: () => `<div class="card-description small">${__(txt)}</div>`,
-			html: true,
-		});
+		//
 	}
 
 	add_button(label, click, opts) {
