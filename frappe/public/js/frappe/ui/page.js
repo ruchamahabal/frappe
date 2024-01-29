@@ -785,7 +785,18 @@ frappe.ui.Page = class Page {
 	}
 
 	add_help_button(txt) {
-		//
+		const description = $(`
+			<button class="btn-reset description-btn">
+				${frappe.utils.icon("help", "md") }
+			</button>
+		`).insertAfter(this.$title_area.find(".title-text"));
+
+		description.popover({
+			trigger: "hover",
+			placement: "top",
+			content: () => `<div class="card-description small">${__(txt)}</div>`,
+			html: true,
+		});
 	}
 
 	add_button(label, click, opts) {

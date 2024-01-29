@@ -104,10 +104,11 @@
  "icon": "fa fa-random",
  "idx": 1,
  "links": [],
- "modified": "2023-12-08 15:52:37.525003",
+ "modified": "2024-01-29 14:04:13.559924",
  "modified_by": "Administrator",
  "module": "Workflow",
  "name": "Workflow",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
