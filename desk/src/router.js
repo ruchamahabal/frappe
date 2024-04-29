@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router"
 import { session } from "@/data/session"
 import { user } from "@/data/user"
 
+import ModulePage from "@/pages/ModulePage.vue"
+
 const routes = [
 	{
 		path: "/",
@@ -13,6 +15,11 @@ const routes = [
 		name: "Login",
 		component: () => import("@/pages/Login.vue"),
 	},
+	{
+		path: "/:module",
+		name: "ModulePage",
+		component: ModulePage,
+	}
 ]
 
 let router = createRouter({

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<!-- Chrome, Firefox OS and Opera -->
+		<meta name="theme-color" content="#0089FF" />
+		<!-- Windows Phone -->
+		<meta name="msapplication-navbutton-color" content="#0089FF" />
+		<!-- iOS Safari -->
+		<meta name="apple-mobile-web-app-status-bar-style" content="#0089FF" />
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+		<meta content="utf-8" http-equiv="encoding" />
+		<meta name="author" content="" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0,
+			maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui"
+		/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="white" />
+		<meta name="mobile-web-app-capable" content="yes" />
+
+		<link rel="icon" href="/assets/frappe/desk/favicon.png" />
+
+		<title>Frappe</title>
+		<script type="module" crossorigin src="/assets/frappe/desk/assets/index.236a2667.js"></script>
+		<link rel="modulepreload" href="/assets/frappe/desk/assets/vendor.d2bdce84.js">
+		<link rel="stylesheet" href="/assets/frappe/desk/assets/vendor.1875b906.css">
+		<link rel="stylesheet" href="/assets/frappe/desk/assets/index.640bdea2.css">
+	</head>
+	<body>
+		<!-- Main Vue App -->
+		<div id="app" class="h-full"></div>
+
+		<!-- For Teleports -->
+		<div id="modals"></div>
+		<div id="popovers"></div>
+
+		<script>
+			if (!window.frappe) window.frappe = {}
+			window.frappe.boot = JSON.parse({{ boot }})
+
+			window.csrf_token = "{{ csrf_token }}"
+		</script>
+
+		
+	</body>
+</html>
