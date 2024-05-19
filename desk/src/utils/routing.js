@@ -10,7 +10,6 @@ export function getRoute(link, module) {
 		return {
 			name: "List",
 			params: {
-				module: module,
 				id: slug(link.link_to),
 			},
 		}

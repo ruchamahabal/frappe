@@ -13,6 +13,7 @@ import { ref, watch, inject } from "vue"
 import { useRoute } from "vue-router"
 import { createResource } from "frappe-ui"
 import { slug } from "@/utils/routing"
+import { modulesBySlug, doctypesBySlug } from "@/data/permissions"
 
 import ModuleSidebar from "@/components/ModuleSidebar.vue"
 import Navbar from "@/components/Navbar.vue"
@@ -21,6 +22,7 @@ const route = useRoute()
 const permissions = inject("$permissions")
 
 const moduleSlug = ref("")
+const isDocTypeView = ref(false)
 
 const workspaceModule = createResource({
 	url: "frappe.api.desk.get_workspace_module",
@@ -30,7 +32,12 @@ watch(
 	() => route.params?.module,
 	(module) => {
 		if (!module) return
-		moduleSlug.value = module
+		if (module in doctypesBySlug) {
+			isDocTypeView.value = true
+			moduleSlug.value = "stock"
+		} else {
+			moduleSlug.value = module
+		}
 	},
 	{ immediate: true }
 )

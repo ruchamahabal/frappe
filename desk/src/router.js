@@ -32,10 +32,9 @@ const routes = [
 		component: () => import("@/pages/Form.vue"),
 	},
 	{
-		// TODO: reaching a doctype should be easy: /desk/item -> /desk/item/view/list
-		path: "/:module/list/:id",
+		path: "/:id",
 		name: "List",
-		component: () => import("@/pages/List.vue"),
+		component: () => import("@/pages/List.vue")
 	},
 	{
 		path: "/:module/report/:id",
