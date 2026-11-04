@@ -98,6 +98,11 @@ export async function parseImports(
 	}
 }
 
+export async function parseModuleProgram(code: string): Promise<BabelProgram> {
+	const [sfc] = await loadCompilers()
+	return sfc.babelParse(code, { sourceType: "module" }).program
+}
+
 function* staticImports(program: BabelProgram): Generator<ModuleImport> {
 	for (const node of program.body) {
 		if (node.type === "ImportDeclaration") {

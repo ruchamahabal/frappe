@@ -10,7 +10,8 @@
 
 import { createResource } from "frappe-ui"
 import { compileFile, describeError } from "@/runtime/compiler"
-import { AppModuleRegistry, clearAppStyles } from "@/runtime/moduleRegistry"
+import { clearAppStyles } from "@/runtime/moduleRegistry"
+import { NativeModuleLoader as AppModuleRegistry } from "@/runtime/nativeModuleLoader"
 import { scrub } from "@/utils/helpers"
 import type { RouterConfig } from "@/router/app_router"
 
@@ -50,6 +51,7 @@ async function fetchSources(appName: string): Promise<void> {
 	for (const file of files) {
 		sources[file.path] = file.content
 	}
+	registry?.dispose()
 	registry = new AppModuleRegistry(sources)
 	clearAppStyles(new Set(Object.keys(sources)))
 }
@@ -58,6 +60,7 @@ async function fetchSources(appName: string): Promise<void> {
 export function unloadAppRuntime(): void {
 	loadedAppName = null
 	sources = {}
+	registry?.dispose()
 	registry = null
 	clearAppStyles()
 }

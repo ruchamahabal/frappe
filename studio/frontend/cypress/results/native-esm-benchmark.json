@@ -1,0 +1,49 @@
+{
+  "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/15.20.1 Chrome/138.0.7204.251 Electron/37.6.0 Safari/537.36",
+  "warmCompiler": true,
+  "runs": 5,
+  "results": [
+    {
+      "modules": 26,
+      "kind": "commonjs",
+      "loadMs": 1.3,
+      "addPageMs": 0.4,
+      "cached100Ms": 0.2
+    },
+    {
+      "modules": 26,
+      "kind": "native",
+      "loadMs": 7.7,
+      "addPageMs": 2.2,
+      "cached100Ms": 0.3
+    },
+    {
+      "modules": 101,
+      "kind": "commonjs",
+      "loadMs": 3.4,
+      "addPageMs": 0.3,
+      "cached100Ms": 0.2
+    },
+    {
+      "modules": 101,
+      "kind": "native",
+      "loadMs": 23.1,
+      "addPageMs": 7.1,
+      "cached100Ms": 0.3
+    },
+    {
+      "modules": 251,
+      "kind": "commonjs",
+      "loadMs": 3.8,
+      "addPageMs": 0.2,
+      "cached100Ms": 0.2
+    },
+    {
+      "modules": 251,
+      "kind": "native",
+      "loadMs": 50.4,
+      "addPageMs": 15,
+      "cached100Ms": 0.4
+    }
+  ]
+}

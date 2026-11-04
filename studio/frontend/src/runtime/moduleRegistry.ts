@@ -212,7 +212,7 @@ function importError(path: string, message: string): CompileError {
 // rebuild replaces a file's styles instead of stacking duplicates.
 const styleElements = new Map<string, HTMLStyleElement>()
 
-function applyStyles(styles: Record<string, string>) {
+export function applyStyles(styles: Record<string, string>) {
 	for (const [path, css] of Object.entries(styles)) {
 		let element = styleElements.get(path)
 		if (!element || !element.isConnected) {
